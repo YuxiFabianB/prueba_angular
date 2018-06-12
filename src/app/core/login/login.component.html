@@ -1,0 +1,21 @@
+<div>
+
+  <div>
+    <h1>HR Management</h1>
+  </div>
+
+  <div>
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="User" [(ngModel)]="user">
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field class="example-full-width">
+      <input matInput type="password" placeholder="Password" [(ngModel)]="password">
+    </mat-form-field>
+  </div>
+
+  <button mat-button class="btn btn-secundary" (click)="login()">Login</button>
+
+</div>
