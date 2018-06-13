@@ -1,31 +1,3 @@
-<div>
-  <h1>HR Management</h1>
-</div>
+<app-main-icons></app-main-icons>
 
-<div>
-  <span class="navbar-text">
 
-    <button (click)="login()"
-      *ngIf="!auth.isAuthenticated()"
-      type="button" 
-      name="button">Login</button>
-
-      <button (click)="logout()"
-        *ngIf="auth.isAuthenticated()"
-        type="button" name="button">Logout</button>
-
-  </span>
-</div>
-
-<div class="row">
-  <div class="col-md-2">
-    <i class="far fa-user"></i>
-    <div [routerLink]="['/employees']">Employees</div>
-  </div>
-
-  <div class="col-md-2">
-    <i class="far fa-folder"></i>
-    <div [routerLink]="['/projects']">Projects</div>
-  </div>
-  
-</div>

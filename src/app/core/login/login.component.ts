@@ -25,6 +25,7 @@ export class LoginComponent {
   }
 
   ngOnInit() {    
+    debugger;
     if(this.auth.isAuthenticated()){
       this.router.navigate(['/main']);
     }else{

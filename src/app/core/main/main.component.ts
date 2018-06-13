@@ -8,16 +8,16 @@ import { AuthService } from '../../shared/services/auth.service';
 })
 export class MainComponent implements OnInit {
 
+  mobileQuery: MediaQueryList;
+
+  private _mobileQueryListener: () => void;
+
   constructor(
     private auth: AuthService
-  ) { }
-
-  ngOnInit() {    
+  ) {
   }
 
-  logout(){
-    this.auth.logout();
-    this.auth.login();
+  ngOnInit() {
   }
 
 }
