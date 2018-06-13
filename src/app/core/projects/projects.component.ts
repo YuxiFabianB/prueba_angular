@@ -44,9 +44,6 @@ export class ProjectsComponent implements OnInit {
   }
 
   deleteProject(project: Project) {
-
-    debugger;
-
     //Open the dialog with parameters.
     let dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       data: {
@@ -56,11 +53,9 @@ export class ProjectsComponent implements OnInit {
     });
 
     //Get the response when the dialog is closed.
-    dialogRef.afterClosed().subscribe(data => {
-      debugger;
+    dialogRef.afterClosed().subscribe(data => {      
       if (data && data.accept === true) {
         this.projectService.deleteProject(project.id).subscribe(resp => {
-          debugger;
           let position = this.projects.indexOf(project);
           let remove = this.projects.splice(position, 1);
           this.dataSource.data = this.projects;

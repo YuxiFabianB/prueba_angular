@@ -34,7 +34,7 @@ export class EmployeesComponent implements OnInit {
   }
 
   fillEmployeesTable() {
-    this.employeetService.getProjects().subscribe((employees: Employee[]) => {
+    this.employeetService.getEmployees().subscribe((employees: Employee[]) => {
       this.employees = employees;
       this.dataSource = new MatTableDataSource(this.employees);
       this.dataSource.paginator = this.paginator;

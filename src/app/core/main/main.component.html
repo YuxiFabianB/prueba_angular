@@ -2,6 +2,21 @@
   <h1>HR Management</h1>
 </div>
 
+<div>
+  <span class="navbar-text">
+
+    <button (click)="login()"
+      *ngIf="!auth.isAuthenticated()"
+      type="button" 
+      name="button">Login</button>
+
+      <button (click)="logout()"
+        *ngIf="auth.isAuthenticated()"
+        type="button" name="button">Logout</button>
+
+  </span>
+</div>
+
 <div class="row">
   <div class="col-md-2">
     <i class="far fa-user"></i>
@@ -12,4 +27,5 @@
     <i class="far fa-folder"></i>
     <div [routerLink]="['/projects']">Projects</div>
   </div>
+  
 </div>
