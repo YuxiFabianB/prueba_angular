@@ -7,6 +7,8 @@ app-main-icons {
     font-size: 2vw;
 }
 
+
+
 app-main-icons /deep/ > div {
     padding: 20px 0;
     background: #dcd6d6;
@@ -15,4 +17,17 @@ app-main-icons /deep/ > div {
 
 app-main-icons /deep/ > div:hover {
     background: #d6cfcf;
+}
+
+app-not-found{
+    height: 100%;
+    display: grid;
+    align-content: center;
+    grid-template-columns: auto;
+    text-align: center;
+    font-size: 2vw;
+}
+
+app-main-icons > div {
+    padding: 20px 0;    
 }
