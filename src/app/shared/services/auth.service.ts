@@ -2,8 +2,8 @@
 
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { filter } from 'rxjs/operators';
 import * as auth0 from 'auth0-js';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class AuthService {
@@ -21,25 +21,31 @@ export class AuthService {
 
   constructor(public router: Router) { }
 
-  public login(): void {    
+  public login(): void {
     this.auth0.authorize();
   }
 
   // ...
-  public handleAuthentication(): void {    
-    this.auth0.parseHash((err, authResult) => {      
-      if (authResult && authResult.accessToken && authResult.idToken) {
-        window.location.hash = '';
-        this.setSession(authResult);
-        this.router.navigate(['/main']);
-      } else if (err) {
-        this.router.navigate(['/login']);
-        console.log(err);
-      }
+  public handleAuthentication(): Observable<any> {
+    return new Observable(observable => {
+      this.auth0.parseHash((err, authResult) => {
+        if (authResult && authResult.accessToken && authResult.idToken) {
+          window.location.hash = '';
+          this.setSession(authResult);
+          observable.next("successful");
+        } else
+
+          if (err) {
+            console.log(err);
+            observable.next("error");
+          }
+        observable.next("not-logged");
+      });
     });
+
   }
 
-  private setSession(authResult): void {    
+  private setSession(authResult): void {
     // Set the time that the Access Token will expire at
     const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
     localStorage.setItem('access_token', authResult.accessToken);
@@ -47,36 +53,21 @@ export class AuthService {
     localStorage.setItem('expires_at', expiresAt);
   }
 
-  public logout(): void {    
+  public logout(): void {
     // Remove tokens and expiry time from localStorage
     localStorage.removeItem('access_token');
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
     // Go back to the home route
-    this.router.navigate(['/login']);
+    //this.router.navigate(['/login']);
+    this.login();
   }
 
-  public isAuthenticated(): boolean {    
+  public isAuthenticated(): boolean {
     // Check whether the current time is past the
     // Access Token's expiry time
     const expiresAt = JSON.parse(localStorage.getItem('expires_at'));
-    return new Date().getTime() < expiresAt;
+    return expiresAt ? new Date().getTime() < expiresAt : false;
   }
-
-  public getProfile(cb): void {    
-    const accessToken = localStorage.getItem('access_token');
-    if (!accessToken) {
-      throw new Error('Access Token must exist to fetch profile');
-    }
-
-    const self = this;
-    this.auth0.client.userInfo(accessToken, (err, profile) => {
-      if (profile) {
-        self.userProfile = profile;
-      }
-      cb(err, profile);
-    });
-  }
-
 
 }
