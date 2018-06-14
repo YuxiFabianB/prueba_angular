@@ -17,7 +17,7 @@ export class SideNavComponent {
     changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
     private auth: AuthService
-  ) {
+  ) {    
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);

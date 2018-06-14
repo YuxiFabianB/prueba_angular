@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatSnackBar, MatDialog, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
-import { Project } from '../../shared/models/project';
-import { ProjectService } from '../../shared/services/project.service';
+import { MatDialog, MatPaginator, MatSnackBar, MatSort, MatTableDataSource } from '@angular/material';
+import { environment } from '../../../environments/environment';
 import { ConfirmationDialogComponent } from '../../shared/components/confirmation-dialog/confirmation-dialog.component';
+import { Project } from '../../shared/models/project';
+import { Api } from '../../shared/services/api';
+import { ProjectService } from '../../shared/services/project.service';
 import { CustomSnackBar } from '../../shared/utils/custom-snackbar';
 import { ProjectDialogComponent } from '../project-dialog/project-dialog.component';
 
@@ -25,10 +27,11 @@ export class ProjectsComponent implements OnInit {
   ];
 
   constructor(
-    private projectService: ProjectService,
+    private api: Api,
     private snackBar: MatSnackBar,
     private dialog: MatDialog,
-    private customSnackBar: CustomSnackBar
+    private customSnackBar: CustomSnackBar,
+    private projectService: ProjectService
   ) { }
 
   ngOnInit() {
@@ -36,7 +39,7 @@ export class ProjectsComponent implements OnInit {
   }
 
   fillProjectsTable() {
-    this.projectService.getProjects().subscribe((projects: Project[]) => {
+    this.api.get(environment.projectPath).subscribe((projects: Project[]) => {
       this.projects = projects;
       this.dataSource = new MatTableDataSource(this.projects);
       this.dataSource.paginator = this.paginator;
@@ -56,7 +59,7 @@ export class ProjectsComponent implements OnInit {
     //Get the response when the dialog is closed.
     dialogRef.afterClosed().subscribe(data => {
       if (data && data.accept === true) {
-        this.projectService.deleteProject(project.id).subscribe(resp => {
+        this.api.delete(environment.projectPath + "/" + project.id).subscribe(resp => {
           let position = this.projects.indexOf(project);
           let remove = this.projects.splice(position, 1);
           this.dataSource.data = this.projects;

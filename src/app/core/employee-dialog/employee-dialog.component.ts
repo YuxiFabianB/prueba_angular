@@ -1,11 +1,10 @@
 import { Component, Inject, OnDestroy } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { Employee } from '../../shared/models/employee';
-import { EmployeeService } from '../../shared/services/employee.service';
 import { Project } from '../../shared/models/project';
-import { ProjectService } from '../../shared/services/project.service';
 import { Color } from '../../shared/models/color';
-import { ColorsService } from '../../shared/services/colors.service';
+import { Api } from '../../shared/services/api';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-employee-dialog',
@@ -24,12 +23,10 @@ export class EmployeeDialogComponent implements OnDestroy {
   constructor(
     private dialogRef: MatDialogRef<EmployeeDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data,
-    private employeeService: EmployeeService,
-    private projectService: ProjectService,
-    private colorService: ColorsService
+    private api: Api
   ) {
     if (data.employeeId) {
-      employeeService.getEmployee(data.employeeId).subscribe((employee: Employee) => {
+      this.api.get(environment.employeePath + "/" + data.employeeId).subscribe((employee: Employee) => {
         this.employee = employee;
         this.selectedProject = employee.project;
         this.selectedColor = employee.favoriteColor;
@@ -39,11 +36,11 @@ export class EmployeeDialogComponent implements OnDestroy {
       this.employee = new Employee();
     }
 
-    projectService.getProjects().subscribe((projects: Project[]) => {
+    this.api.get(environment.projectPath).subscribe((projects: Project[]) => {
       this.projects = projects;
     })
 
-    colorService.getColors().subscribe((colors: Color[]) => {
+    this.api.get(environment.colorsPath).subscribe((colors: Color[]) => {
       this.colors = colors;
     })
   }

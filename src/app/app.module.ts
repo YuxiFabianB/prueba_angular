@@ -16,10 +16,9 @@ import { MaterialModule } from './material-module/material-module.module';
 import { ConfirmationDialogComponent } from './shared/components/confirmation-dialog/confirmation-dialog.component';
 import { NotFoundComponent } from './shared/components/not-found/not-found.component';
 import { SideNavComponent } from './shared/components/side-nav/side-nav.component';
+import { Api } from './shared/services/api';
 import { AuthGuardService } from './shared/services/auth-guard.service';
 import { AuthService } from './shared/services/auth.service';
-import { EmployeeService } from './shared/services/employee.service';
-import { LoginService } from './shared/services/login.service';
 import { ProjectService } from './shared/services/project.service';
 import { CustomSnackBar } from './shared/utils/custom-snackbar';
 
@@ -50,13 +49,12 @@ import { CustomSnackBar } from './shared/utils/custom-snackbar';
     EmployeeDialogComponent
   ],
   providers: [
-    LoginService,
-    ProjectService,
-    EmployeeService,
     CustomSnackBar,
     InMemoryDataService,
     AuthService,
-    AuthGuardService
+    AuthGuardService,
+    Api,
+    ProjectService
   ],
   bootstrap: [
     AppComponent

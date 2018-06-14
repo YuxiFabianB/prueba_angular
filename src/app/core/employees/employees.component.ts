@@ -1,14 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatPaginator, MatSnackBar, MatSort, MatTableDataSource } from '@angular/material';
+import { environment } from '../../../environments/environment';
 import { ConfirmationDialogComponent } from '../../shared/components/confirmation-dialog/confirmation-dialog.component';
 import { Color } from '../../shared/models/color';
 import { Employee } from '../../shared/models/employee';
 import { Project } from '../../shared/models/project';
-import { EmployeeService } from '../../shared/services/employee.service';
+import { Api } from '../../shared/services/api';
+import { ProjectService } from '../../shared/services/project.service';
 import { CustomSnackBar } from '../../shared/utils/custom-snackbar';
 import { EmployeeDialogComponent } from '../employee-dialog/employee-dialog.component';
-import { ProjectService } from '../../shared/services/project.service';
-import { ColorsService } from '../../shared/services/colors.service';
 
 @Component({
   selector: 'app-employees',
@@ -35,18 +35,17 @@ export class EmployeesComponent implements OnInit {
   ];
 
   constructor(
-    private employeeService: EmployeeService,
     private snackBar: MatSnackBar,
     private dialog: MatDialog,
     private customSnackBar: CustomSnackBar,
-    private projectService: ProjectService,
-    private colorService: ColorsService
+    private api: Api,
+    private projectService: ProjectService
   ) {
-    projectService.getProjects().subscribe((projects: Project[]) => {
+    this.api.get(environment.projectPath).subscribe((projects: Project[]) => {
       this.projects = projects;
     })
 
-    colorService.getColors().subscribe((colors: Color[]) => {
+    this.api.get(environment.colorsPath).subscribe((colors: Color[]) => {
       this.colors = colors;
     })
   }
@@ -56,7 +55,7 @@ export class EmployeesComponent implements OnInit {
   }
 
   fillEmployeesTable() {
-    this.employeeService.getEmployees().subscribe((employees: Employee[]) => {
+    this.api.get(environment.employeePath).subscribe((employees: Employee[]) => {
       this.employees = employees;
 
       this.employees.forEach(employee => {
@@ -84,7 +83,7 @@ export class EmployeesComponent implements OnInit {
     //Get the response when the dialog is closed.
     dialogRef.afterClosed().subscribe(data => {
       if (data && data.accept === true) {
-        this.employeeService.deleteEmployee(employee.id).subscribe(resp => {
+        this.api.delete(environment.employeePath + "/" + employee.id).subscribe(resp => {
           let position = this.employees.indexOf(employee);
           let remove = this.employees.splice(position, 1);
           this.dataSource.data = this.employees;
@@ -109,16 +108,18 @@ export class EmployeesComponent implements OnInit {
 
     //Get the response when the dialog is closed.
     dialogRef.afterClosed().subscribe(data => {
-      if (data.employee) {
-        this.editEmployee(data.employee);
-      }
+      if (data) {
+        if (data.employee) {
+          this.editEmployee(data.employee);
+        }
 
-      this.projectService.verifyTeamChanges(data.selectedProject, data.originalProject);
+        this.projectService.verifyTeamChanges(data.selectedProject, data.originalProject);
+      }
     });
   }
 
   editEmployee(employee: Employee) {
-    this.employeeService.updateCreateEmployee(employee).subscribe(resp => {
+    this.updateCreateEmployee(employee).subscribe(resp => {
       if (employee.id) {
         this.customSnackBar.openSnackBar(this.snackBar, "Project was updated.", "OK");
       } else {
@@ -126,6 +127,14 @@ export class EmployeesComponent implements OnInit {
       }
       this.fillEmployeesTable();
     });
+  }
+
+  updateCreateEmployee(employee: Employee) {
+    if (employee.id) {
+      return this.api.put(environment.employeePath + "/" + employee.id, employee)
+    } else {
+      return this.api.post(environment.employeePath, employee)
+    }
   }
 
   applyFilter(filterValue: string) {

@@ -1,41 +1,22 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from '../../../environments/environment';
 import { Project } from '../models/project';
+import { Api } from './api';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProjectService {
 
-  serviceUrl = "http://localhost:4200/api/";
-  projectPath = "projects";
-
   constructor(
-    private http: HttpClient
+    private api: Api
   ) { }
-
-  getProjects() {
-    let url = `${this.serviceUrl + this.projectPath}`
-    return this.http.get(url);
-  }
-
-  getProject(projectId: number) {
-    let url = `${this.serviceUrl + this.projectPath + "/" + projectId}`
-    return this.http.get(url);
-  }
-
-  deleteProject(projectId: number) {
-    let url = `${this.serviceUrl + this.projectPath + "/" + projectId}`
-    return this.http.delete(url);
-  }
 
   updateCreateProject(project: Project) {
     if (project.id) {
-      let url = `${this.serviceUrl + this.projectPath + "/" + project.id}`
-      return this.http.put(url, project);
+      return this.api.put(environment.projectPath + "/" + project.id, project);
     } else {
-      let url = `${this.serviceUrl + this.projectPath}`
-      return this.http.post(url, project);
+      return this.api.post(environment.projectPath, project);
     }
   }
 
@@ -46,20 +27,17 @@ export class ProjectService {
   }
 
   changeTeamSize(selectedId: number, oldId: number) {
-    this.getProject(selectedId).subscribe((project: Project) => {
+    this.api.get(environment.projectPath + '/' + selectedId).subscribe((project: Project) => {
       project.teamSize++;
-      this.saveTeamSize(project);
+      this.updateCreateProject(project).subscribe(resp => {
+      });
     });
 
-    this.getProject(oldId).subscribe((project: Project) => {
+    this.api.get(environment.projectPath + '/' + oldId).subscribe((project: Project) => {
       project.teamSize--;
-      this.saveTeamSize(project);
+      this.updateCreateProject(project).subscribe(resp => {
+      });
     })
-  }
-
-  saveTeamSize(project: Project) {
-    this.updateCreateProject(project).subscribe(resp => {
-    });
   }
 
 }

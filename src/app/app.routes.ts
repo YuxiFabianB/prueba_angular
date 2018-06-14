@@ -27,7 +27,7 @@ const APP_ROUTES: Routes = [
     },        
     { path: 'callback', redirectTo: 'login' },
     { path: '', pathMatch: 'full', redirectTo: 'login' },
-    { path: '**', pathMatch: 'full', redirectTo: 'notfound' }
+    { path: '**', component: NotFoundComponent }
 
 ];
 

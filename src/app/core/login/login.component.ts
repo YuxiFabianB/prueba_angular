@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../shared/services/auth.service';
-import { LoginService } from '../../shared/services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +15,6 @@ export class LoginComponent {
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private loginService: LoginService,
     private auth: AuthService
   ) {
   }

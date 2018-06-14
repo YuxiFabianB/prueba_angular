@@ -1,7 +1,7 @@
 <div>
   <h1>Employees.</h1>
 
-  <button class="btn btn-secundary" mat-button (click)="newEmployee()">New</button>
+  <button class="btn btn-secundary float-right" mat-button (click)="newEmployee()">New</button>
 </div>
 
 <mat-form-field>
@@ -49,8 +49,8 @@
     <ng-container matColumnDef="actionsColumn">
       <th mat-header-cell *matHeaderCellDef> Actions </th>
       <td mat-cell *matCellDef="let row" class="action-icon">
-        <i class="far fa-trash-alt" (click)="deleteEmployee(row)"></i>
         <i class="far fa-edit" (click)="openEmployeeDialog(row)"></i>
+        <i class="far fa-trash-alt" (click)="deleteEmployee(row)"></i>
       </td>
     </ng-container>
 

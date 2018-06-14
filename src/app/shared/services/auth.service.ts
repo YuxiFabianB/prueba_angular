@@ -4,20 +4,14 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import * as auth0 from 'auth0-js';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class AuthService {
 
   public userProfile: any;
 
-  auth0 = new auth0.WebAuth({
-    clientID: 'B3ssMr0r0l2tOprsOk4pa1OUthcTtCqZ',
-    domain: 'dayro.auth0.com',
-    responseType: 'token id_token',
-    audience: 'https://dayro.auth0.com/userinfo',
-    redirectUri: 'http://localhost:4200/callback',
-    scope: 'openid profile'
-  });
+  auth0 = new auth0.WebAuth(environment.auth0Config);
 
   constructor(public router: Router) { }
 

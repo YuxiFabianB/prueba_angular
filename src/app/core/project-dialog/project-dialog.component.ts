@@ -1,7 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { Project } from '../../shared/models/project';
-import { ProjectService } from '../../shared/services/project.service';
+import { Api } from '../../shared/services/api';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-project-dialog',
@@ -15,10 +16,10 @@ export class ProjectDialogComponent {
   constructor(
     private dialogRef: MatDialogRef<ProjectDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data,
-    private projectService: ProjectService
+    private api: Api
   ) {
     if (data.projectId) {
-      projectService.getProject(data.projectId).subscribe((project: Project) => {
+      this.api.get(environment.projectPath + "/" + data.projectId).subscribe((project: Project) => {
         this.project = project;
       })
     } else {

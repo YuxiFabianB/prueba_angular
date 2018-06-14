@@ -3,7 +3,23 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+
+  backEndUrl: "http://localhost:4200/api/",
+
+  employeePath: "employees",
+  colorsPath: "colors",
+  projectPath: "projects",
+  userPath: "users",
+
+  auth0Config: {
+    clientID: 'B3ssMr0r0l2tOprsOk4pa1OUthcTtCqZ',
+    domain: 'dayro.auth0.com',
+    responseType: 'token id_token',
+    audience: 'https://dayro.auth0.com/userinfo',
+    redirectUri: 'http://localhost:4200/callback',
+    scope: 'openid profile'
+  }
 };
 
 /*
