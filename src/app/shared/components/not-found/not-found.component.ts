@@ -13,7 +13,6 @@ export class NotFoundComponent implements OnInit {
   constructor(
     private auth: AuthService
   ) {
-    debugger;
     this.secondsToRedirect = 3;
   }
 

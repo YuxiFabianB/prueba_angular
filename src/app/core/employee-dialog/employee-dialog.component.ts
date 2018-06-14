@@ -53,7 +53,6 @@ export class EmployeeDialogComponent implements OnDestroy {
   }
 
   ngOnDestroy() {
-    debugger;
     this.employee.favoriteColor = this.selectedColor;
     this.employee.project = this.selectedProject;
   }
