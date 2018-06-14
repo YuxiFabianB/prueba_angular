@@ -20,7 +20,7 @@ export class ProjectService {
   }
 
   getProject(projectId: number) {
-    let url = `${this.serviceUrl + this.projectPath + "/" + projectId }`
+    let url = `${this.serviceUrl + this.projectPath + "/" + projectId}`
     return this.http.get(url);
   }
 
@@ -37,6 +37,29 @@ export class ProjectService {
       let url = `${this.serviceUrl + this.projectPath}`
       return this.http.post(url, project);
     }
+  }
+
+  verifyTeamChanges(selectedId: number, oldId: number) {
+    if (selectedId != oldId) {
+      this.changeTeamSize(selectedId, oldId)
+    }
+  }
+
+  changeTeamSize(selectedId: number, oldId: number) {
+    this.getProject(selectedId).subscribe((project: Project) => {
+      project.teamSize++;
+      this.saveTeamSize(project);
+    });
+
+    this.getProject(oldId).subscribe((project: Project) => {
+      project.teamSize--;
+      this.saveTeamSize(project);
+    })
+  }
+
+  saveTeamSize(project: Project) {
+    this.updateCreateProject(project).subscribe(resp => {
+    });
   }
 
 }

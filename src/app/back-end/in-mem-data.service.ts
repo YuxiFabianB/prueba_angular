@@ -3,12 +3,12 @@ import { InMemoryDbService } from 'angular-in-memory-web-api';
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
     const projects = [
-      { id: 1, name: 'Project 1', teamSize: 0, clientName: "TCC" },
+      { id: 1, name: 'Project 1', teamSize: 2, clientName: "TCC" },
       { id: 2, name: 'Project 2', teamSize: 0, clientName: "MSI" },
-      { id: 3, name: 'Project 3', teamSize: 0, clientName: "Brainshark" },
+      { id: 3, name: 'Project 3', teamSize: 1, clientName: "Brainshark" },
       { id: 4, name: 'Project 4', teamSize: 0, clientName: "IMS" },
-      { id: 5, name: 'Project 5', teamSize: 0, clientName: "Apex" },
-      { id: 6, name: 'Project 6', teamSize: 0, clientName: "Apex" }
+      { id: 5, name: 'Project 5', teamSize: 1, clientName: "Apex" },
+      { id: 6, name: 'Project 6', teamSize: 1, clientName: "Apex" }
     ];
 
     const employees = [

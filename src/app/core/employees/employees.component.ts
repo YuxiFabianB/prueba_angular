@@ -41,7 +41,7 @@ export class EmployeesComponent implements OnInit {
     private customSnackBar: CustomSnackBar,
     private projectService: ProjectService,
     private colorService: ColorsService
-  ) { 
+  ) {
     projectService.getProjects().subscribe((projects: Project[]) => {
       this.projects = projects;
     })
@@ -108,10 +108,12 @@ export class EmployeesComponent implements OnInit {
     });
 
     //Get the response when the dialog is closed.
-    dialogRef.afterClosed().subscribe((employee: Employee) => {
-      if (employee) {
-        this.editEmployee(employee);
+    dialogRef.afterClosed().subscribe(data => {
+      if (data.employee) {
+        this.editEmployee(data.employee);
       }
+
+      this.projectService.verifyTeamChanges(data.selectedProject, data.originalProject);
     });
   }
 

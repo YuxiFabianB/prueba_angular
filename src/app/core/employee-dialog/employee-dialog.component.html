@@ -39,7 +39,7 @@
     <div mat-dialog-actions class="center-btn">
         <button class="btn btn-secundary" (click)="onNoClick()">Cancel</button>
 
-        <button class="btn btn-secundary" mat-button [mat-dialog-close]="employee">Save</button>
+        <button class="btn btn-secundary" mat-button [mat-dialog-close]="{employee: employee, selectedProject: selectedProject, originalProject: originalProject}">Save</button>
     </div>
 
 </div>

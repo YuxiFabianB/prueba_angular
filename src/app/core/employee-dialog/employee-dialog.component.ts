@@ -17,6 +17,7 @@ export class EmployeeDialogComponent implements OnDestroy {
   employee: Employee;
   selectedColor: number;
   selectedProject: number;
+  originalProject: number;
   projects: Project[];
   colors: Color[];
 
@@ -31,8 +32,8 @@ export class EmployeeDialogComponent implements OnDestroy {
       employeeService.getEmployee(data.employeeId).subscribe((employee: Employee) => {
         this.employee = employee;
         this.selectedProject = employee.project;
-        debugger;
         this.selectedColor = employee.favoriteColor;
+        this.originalProject = employee.project;
       });
     } else {
       this.employee = new Employee();
