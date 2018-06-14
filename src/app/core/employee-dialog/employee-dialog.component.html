@@ -1,25 +1,17 @@
 <h4>Create - Edit employee</h4>
 
-<!--div class="employee-dialog-container">
+<div class="dialog-container">
+
     <mat-form-field *ngIf="employee">
-        <input matInput placeholder="Nombre" [(ngModel)]="employee.name">
+        <input matInput placeholder="Name" [(ngModel)]="employee.name">
     </mat-form-field>
 
     <mat-form-field *ngIf="employee">
-        <input matInput placeholder="Apellido" [(ngModel)]="employee.lastname">
+        <input matInput placeholder="Company" [(ngModel)]="employee.company">
     </mat-form-field>
 
     <mat-form-field *ngIf="employee">
-        <input matInput placeholder="Identificacion" [(ngModel)]="employee.identification">
-    </mat-form-field>
-
-    <mat-form-field *ngIf="employee">
-        <input matInput placeholder="Correo eléctronico" [formControl]="emailValidator" [(ngModel)]="employee.email">
-        <mat-error *ngIf="emailValidator.invalid">{{getErrorMessage()}}</mat-error>
-    </mat-form-field>
-
-    <mat-form-field *ngIf="employee">
-        <input matInput placeholder="Alias" [(ngModel)]="employee.alias">
+        <input matInput placeholder="Age" [(ngModel)]="employee.age">
     </mat-form-field>
 
     <mat-form-field *ngIf="employee">
@@ -28,10 +20,26 @@
         <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
 
-    <div mat-dialog-actions>
+    <mat-form-field>
+        <mat-select placeholder="Favorite Color" [(ngModel)]="selectedColor" name="color">
+            <mat-option *ngFor="let color of colors" [value]="color.id">
+                {{ color.name }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-select placeholder="Projects" [(ngModel)]="selectedProject" name="project">
+            <mat-option *ngFor="let project of projects" [value]="project.id">
+                {{ project.name }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <div mat-dialog-actions class="center-btn">
         <button class="btn btn-secundary" (click)="onNoClick()">Cancel</button>
 
         <button class="btn btn-secundary" mat-button [mat-dialog-close]="employee">Save</button>
     </div>
 
-</div-->
+</div>

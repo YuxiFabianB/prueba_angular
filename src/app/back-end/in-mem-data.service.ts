@@ -18,7 +18,7 @@ export class InMemoryDataService implements InMemoryDbService {
         company: "Company 1",
         age: 33,
         birthday: new Date(),
-        favoriteColor: "blue",
+        favoriteColor: 2,
         project: 1
       }, {
         id: 2,
@@ -26,7 +26,7 @@ export class InMemoryDataService implements InMemoryDbService {
         company: "Company 1",
         age: 30,
         birthday: new Date(),
-        favoriteColor: "pink",
+        favoriteColor: 2,
         project: 1
       }, {
         id: 3,
@@ -34,16 +34,16 @@ export class InMemoryDataService implements InMemoryDbService {
         company: "Company 3",
         age: 27,
         birthday: new Date(),
-        favoriteColor: "green",
+        favoriteColor: 7,
         project: 3
-        
+
       }, {
         id: 4,
         name: "Diego Rios",
         company: "Company 2",
         age: 30,
         birthday: new Date(),
-        favoriteColor: "pink",
+        favoriteColor: 5,
         project: 5
       }, {
         id: 5,
@@ -51,20 +51,30 @@ export class InMemoryDataService implements InMemoryDbService {
         company: "Company 2",
         age: 30,
         birthday: new Date(),
-        favoriteColor: "pink",
+        favoriteColor: 1,
         project: 6
       }
     ];
 
     const users = [
-      { id: 1, userName: 'dayro', password: '1001', token: "" },      
+      { id: 1, userName: 'dayro', password: '1001', token: "" },
       { id: 1, userName: 'astrid', password: '1501', token: "" },
       { id: 1, userName: 'tomas', password: '1507', token: "" },
     ];
 
-    return { projects, employees, users };
+    const colors = [
+      { id: 1, name: 'black' },
+      { id: 2, name: 'blue' },
+      { id: 3, name: 'green' },
+      { id: 4, name: 'pink' },
+      { id: 5, name: 'red' },
+      { id: 6, name: 'white' },
+      { id: 7, name: 'yellow' },
+    ];
+
+    return { projects, employees, users, colors };
   }
 
-  
+
 
 }

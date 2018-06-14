@@ -12,8 +12,9 @@
         <mat-nav-list>
           <a mat-list-item [routerLink]="['/employees']" (click)="snav.toggle()">Employees</a>
           <a mat-list-item [routerLink]="['/projects']" (click)="snav.toggle()">Projects</a>
-          <a mat-list-item *ngIf="!auth.isAuthenticated()" (click)="login()">Login</a>
-          <a mat-list-item *ngIf="auth.isAuthenticated()" (click)="logout()">Logout</a>
+          <!--a mat-list-item *ngIf="!auth.isAuthenticated()" (click)="login()">Login</a-->
+          <!--a mat-list-item *ngIf="auth.isAuthenticated()" (click)="logout()">Logout</a-->
+          <a mat-list-item  (click)="logout()">Logout</a>
         </mat-nav-list>
       </mat-sidenav>
 

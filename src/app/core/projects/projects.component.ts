@@ -66,9 +66,13 @@ export class ProjectsComponent implements OnInit {
     });
   }
 
+  newProject() {
+    let project = new Project();
+    this.openProjectDialog(project);
+  }
+
   openProjectDialog(project: Project) {
 
-    debugger;
     //Open the dialog with parameters.
     let dialogRef = this.dialog.open(ProjectDialogComponent, {
       width: '500px',
@@ -77,13 +81,13 @@ export class ProjectsComponent implements OnInit {
 
     //Get the response when the dialog is closed.
     dialogRef.afterClosed().subscribe((project: Project) => {
-      if (project) {        
+      if (project) {
         this.editProject(project);
       }
     });
   }
 
-  editProject(project: Project) {    
+  editProject(project: Project) {
     this.projectService.updateCreateProject(project).subscribe(resp => {
       if (project.id) {
         this.customSnackBar.openSnackBar(this.snackBar, "Project was updated.", "OK");

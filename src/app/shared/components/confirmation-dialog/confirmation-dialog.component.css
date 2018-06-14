@@ -1,12 +1,4 @@
-.ap-dialog-container {
-    display: flex;
-    flex-direction: column;
-}
-  
-.ap-dialog-container > * {
-    width: 100%;
-}
-  
+
 button {
     width: 40%;
 }

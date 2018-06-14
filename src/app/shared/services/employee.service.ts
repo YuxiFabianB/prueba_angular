@@ -14,12 +14,17 @@ export class EmployeeService {
     private http: HttpClient
   ) { }
 
-  getEmployees(){
+  getEmployees() {
     let url = `${this.serviceUrl + this.employeePath}`
     return this.http.get(url);
   }
 
-  deleteEmployee(employeeId: number){
+  getEmployee(employeeId: number) {
+    let url = `${this.serviceUrl + this.employeePath + "/" + employeeId}`
+    return this.http.get(url);
+  }
+
+  deleteEmployee(employeeId: number) {
     let url = `${this.serviceUrl + this.employeePath + "/" + employeeId}`
     return this.http.delete(url);
   }

@@ -24,7 +24,6 @@ export class ProjectService {
     return this.http.get(url);
   }
 
-
   deleteProject(projectId: number) {
     let url = `${this.serviceUrl + this.projectPath + "/" + projectId}`
     return this.http.delete(url);

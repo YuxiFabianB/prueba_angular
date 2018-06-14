@@ -1,5 +1,7 @@
 <div>
   <h1>Employees.</h1>
+
+  <button class="btn btn-secundary" mat-button (click)="newEmployee()">New</button>
 </div>
 
 <mat-form-field>
@@ -31,13 +33,18 @@
 
     <ng-container matColumnDef="birthday">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Birthday </th>
-      <td mat-cell *matCellDef="let row"> {{row.birthday}} </td>
+      <td mat-cell *matCellDef="let row"> {{row.birthday | date:'MMM d, yyyy'}} </td>
     </ng-container>
 
     <ng-container matColumnDef="favoriteColor">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Favorite Color </th>
-      <td mat-cell *matCellDef="let row"> {{row.favoriteColor}} </td>
+      <td mat-cell *matCellDef="let row"> {{row.favoriteColorDescription}} </td>
     </ng-container>
+
+    <ng-container matColumnDef="project">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Project </th>
+        <td mat-cell *matCellDef="let row"> {{row.projectDescription}} </td>
+      </ng-container>
 
     <ng-container matColumnDef="actionsColumn">
       <th mat-header-cell *matHeaderCellDef> Actions </th>
