@@ -1,0 +1,22 @@
+<h4>Create - Edit project</h4>
+
+<div class="project-dialog-container">
+    <mat-form-field *ngIf="project">
+        <input matInput placeholder="Name" [(ngModel)]="project.name">
+    </mat-form-field>
+
+    <mat-form-field *ngIf="project">
+        <input matInput placeholder="Team Size" [(ngModel)]="project.teamSize" disabled>
+    </mat-form-field>
+
+    <mat-form-field *ngIf="project">
+        <input matInput placeholder="Customer Name" [(ngModel)]="project.clientName">
+    </mat-form-field>
+
+    <div mat-dialog-actions class="center-btn">
+        <button class="btn btn-secundary" (click)="onNoClick()">Cancel</button>
+
+        <button class="btn btn-secundary" mat-button [mat-dialog-close]="project">Save</button>
+    </div>
+
+</div>

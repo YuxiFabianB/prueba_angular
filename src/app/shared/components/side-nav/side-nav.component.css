@@ -45,4 +45,21 @@ body {
        `<body>` to be our scrolling element for mobile layouts. */
     flex: 1 0 auto;
   }
+
+  .btn-default{
+    background: transparent;
+    border: none;
+    line-height: 16px;
+    color: #fff;
+    margin-right: 18px;
+  }
+
+  mat-sidenav{
+    padding: 0px 15px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  }
+
+  mat-sidenav-content{
+    padding: 0 30px;
+  }
   

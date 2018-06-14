@@ -4,6 +4,7 @@ import { Project } from '../../shared/models/project';
 import { ProjectService } from '../../shared/services/project.service';
 import { ConfirmationDialogComponent } from '../../shared/components/confirmation-dialog/confirmation-dialog.component';
 import { CustomSnackBar } from '../../shared/utils/custom-snackbar';
+import { ProjectDialogComponent } from '../project-dialog/project-dialog.component';
 
 @Component({
   selector: 'app-projects',
@@ -48,12 +49,12 @@ export class ProjectsComponent implements OnInit {
     let dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       data: {
         title: "Delete project.",
-        message: "Are you sure to delete  '" + project.name + "'."
+        message: "Are you sure to delete '" + project.name + "'."
       }
     });
 
     //Get the response when the dialog is closed.
-    dialogRef.afterClosed().subscribe(data => {      
+    dialogRef.afterClosed().subscribe(data => {
       if (data && data.accept === true) {
         this.projectService.deleteProject(project.id).subscribe(resp => {
           let position = this.projects.indexOf(project);
@@ -62,6 +63,34 @@ export class ProjectsComponent implements OnInit {
           this.customSnackBar.openSnackBar(this.snackBar, "Project was deleted.", "OK");
         });
       }
+    });
+  }
+
+  openProjectDialog(project: Project) {
+
+    debugger;
+    //Open the dialog with parameters.
+    let dialogRef = this.dialog.open(ProjectDialogComponent, {
+      width: '500px',
+      data: { projectId: project.id }
+    });
+
+    //Get the response when the dialog is closed.
+    dialogRef.afterClosed().subscribe((project: Project) => {
+      if (project) {        
+        this.editProject(project);
+      }
+    });
+  }
+
+  editProject(project: Project) {    
+    this.projectService.updateCreateProject(project).subscribe(resp => {
+      if (project.id) {
+        this.customSnackBar.openSnackBar(this.snackBar, "Project was updated.", "OK");
+      } else {
+        this.customSnackBar.openSnackBar(this.snackBar, "Project was created.", "OK");
+      }
+      this.fillProjectsTable();
     });
   }
 

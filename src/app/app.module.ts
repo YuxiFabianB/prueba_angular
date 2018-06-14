@@ -5,10 +5,12 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { AppComponent } from './app.component';
 import { APP_ROUTING } from './app.routes';
 import { InMemoryDataService } from './back-end/in-mem-data.service';
+import { EmployeeDialogComponent } from './core/employee-dialog/employee-dialog.component';
 import { EmployeesComponent } from './core/employees/employees.component';
 import { LoginComponent } from './core/login/login.component';
 import { MainIconsComponent } from './core/main-icons/main-icons.component';
 import { MainComponent } from './core/main/main.component';
+import { ProjectDialogComponent } from './core/project-dialog/project-dialog.component';
 import { ProjectsComponent } from './core/projects/projects.component';
 import { MaterialModule } from './material-module/material-module.module';
 import { ConfirmationDialogComponent } from './shared/components/confirmation-dialog/confirmation-dialog.component';
@@ -31,7 +33,9 @@ import { CustomSnackBar } from './shared/utils/custom-snackbar';
     ProjectsComponent,
     ConfirmationDialogComponent,
     SideNavComponent,
-    MainIconsComponent
+    MainIconsComponent,
+    ProjectDialogComponent,
+    EmployeeDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +45,9 @@ import { CustomSnackBar } from './shared/utils/custom-snackbar';
     HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService)
   ],
   entryComponents: [
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    ProjectDialogComponent,
+    EmployeeDialogComponent
   ],
   providers: [
     LoginService,

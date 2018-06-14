@@ -42,8 +42,8 @@
     <ng-container matColumnDef="actionsColumn">
       <th mat-header-cell *matHeaderCellDef> Actions </th>
       <td mat-cell *matCellDef="let row" class="action-icon">
-        <i class="far fa-trash-alt" (click)="deletePerson(row)"></i>
-        <i class="far fa-edit" (click)="openPersonDialog(row)"></i>
+        <i class="far fa-trash-alt" (click)="deleteEmployee(row)"></i>
+        <i class="far fa-edit" (click)="openEmployeeDialog(row)"></i>
       </td>
     </ng-container>
 

@@ -4,10 +4,10 @@
 
   <div>{{data ? data.message : defaultMessage}}</div>
 
-  <div mat-dialog-actions>
-    <button mat-button (click)="onNoClick()">Cancelar</button>
+  <div mat-dialog-actions class="center-btn">
+    <button class="btn btn-secundary" mat-button (click)="onNoClick()">Cancelar</button>
 
-    <button mat-button [mat-dialog-close]="{'accept': true}">Aceptar</button>
+    <button class="btn btn-secundary" mat-button [mat-dialog-close]="{'accept': true}">Aceptar</button>
   </div>
 
 </div>

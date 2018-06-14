@@ -1,0 +1,10 @@
+.project-dialog-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.project-dialog-container > * {
+    width: 100%;
+}
+
+
