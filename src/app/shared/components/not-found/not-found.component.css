@@ -1,0 +1,8 @@
+.error-container {
+    height: 100%;
+    display: grid;
+    align-content: center;
+    grid-template-columns: auto;
+    text-align: center;
+    font-size: 2vw; 
+}

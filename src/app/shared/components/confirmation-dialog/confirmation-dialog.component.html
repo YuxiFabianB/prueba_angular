@@ -1,0 +1,13 @@
+<h4>{{data ? data.title : defaultTitle}}</h4>
+
+<div class="dialog-container">
+
+  <div>{{data ? data.message : defaultMessage}}</div>
+
+  <div mat-dialog-actions class="center-btn">
+    <button class="btn btn-secundary" mat-button (click)="onNoClick()">Cancelar</button>
+
+    <button class="btn btn-secundary" mat-button [mat-dialog-close]="{'accept': true}">Aceptar</button>
+  </div>
+
+</div>

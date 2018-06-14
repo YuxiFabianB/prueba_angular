@@ -1,0 +1,27 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+
+i.far {
+    margin: 2px;
+}
+
+.center-btn{
+    align-items: center;
+    justify-content: center;
+}
+
+.center-btn button{
+    margin: 0 1%
+}
+
+.dialog-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.dialog-container > * {
+    width: 100%;
+}
